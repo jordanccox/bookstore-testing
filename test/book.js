@@ -105,13 +105,6 @@ describe('Books', () => {
   describe('/PUT book/:id', () => {
     it('should UPDATE a book given the id', (done) => {
       // arrange
-      // const originalBook = {
-      //   title: 'The Fellowship of the Ring',
-      //   author: 'J.R.R. Tolkien',
-      //   year: 1954,
-      //   pages: 423
-      // };
-
       const book = {
         id: 2,
         title: 'The Fellowship of the Ring Second Edition',
@@ -119,8 +112,6 @@ describe('Books', () => {
         year: 1967,
         pages: 423
       };
-
-      //Book.addBook(originalBook);
 
       // act
       chai
@@ -138,5 +129,15 @@ describe('Books', () => {
           done();
         });
     });
-  })
+  });
+  describe('/DELETE book/:id', () => {
+    it('should DELETE a book given the id', () => {
+      chai
+        .request(server)
+        .delete('/book/2')
+        .end((err, res) => {
+          res.should.have.status(200);
+        });
+    });
+  });
 });
