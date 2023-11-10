@@ -84,19 +84,20 @@ describe('Books', () => {
         pages: 423
       };
 
-      chai 
-        .request(server)
-        .post('/book')
-        .send(book);
+      Book.addBook(book);
       
       // act
       chai
         .request(server)
-        .get('/book/1')
+        .get('/book/2')
         // assert
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.have.property('id').equal(1);
+          res.body.should.have.property('id').equal(2);
+          res.body.should.have.property('title').equal('The Fellowship of the Ring');
+          res.body.should.have.property('author').equal('J.R.R. Tolkien');
+          res.body.should.have.property('year').equal(1954);
+          res.body.should.have.property('pages').equal(423);
           done();
         });
     });
