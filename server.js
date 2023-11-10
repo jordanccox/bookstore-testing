@@ -77,7 +77,13 @@ myRouter.put('/book/:id', function(request,response) {// Get our query params fr
 	}
 
 	// Update existing book
-	const updatedBook = Book.updateBook(request.body)
+	let updatedBook;
+	try {
+		updatedBook = Book.updateBook(request.body)
+	} catch (err) {
+		response.writeHead(500);
+		return response.end(err.message);
+	}
 	
 	response.writeHead(200, { "Content-Type": "application/json" });
 	return response.end(JSON.stringify(updatedBook));

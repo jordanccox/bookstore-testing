@@ -30,7 +30,7 @@ class Book {
   }
 
   static updateBook(updatedBook) {
-    let book = books.find((book=>book.id == updatedBook.id))
+    let book = books.find((book) => book.id == updatedBook.id);
     Object.assign(book, updatedBook);
     return book;
   }

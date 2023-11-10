@@ -102,4 +102,41 @@ describe('Books', () => {
         });
     });
   });
+  describe('/PUT book/:id', () => {
+    it('should UPDATE a book given the id', (done) => {
+      // arrange
+      // const originalBook = {
+      //   title: 'The Fellowship of the Ring',
+      //   author: 'J.R.R. Tolkien',
+      //   year: 1954,
+      //   pages: 423
+      // };
+
+      const book = {
+        id: 2,
+        title: 'The Fellowship of the Ring Second Edition',
+        author: 'J.R.R. Tolkien',
+        year: 1967,
+        pages: 423
+      };
+
+      //Book.addBook(originalBook);
+
+      // act
+      chai
+        .request(server)
+        .put('/book/2')
+        .send(book)
+        // assert
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.have.property('id').equal(2);
+          res.body.should.have.property('title').equal('The Fellowship of the Ring Second Edition');
+          res.body.should.have.property('author').equal('J.R.R. Tolkien');
+          res.body.should.have.property('year').equal(1967);
+          res.body.should.have.property('pages').equal(423);
+          done();
+        });
+    });
+  })
 });
